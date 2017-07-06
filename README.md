@@ -69,7 +69,7 @@ and the following template:
 
 ```c++
 class Bob {
-int bob();
+	int bob();
 }
 ```
 
