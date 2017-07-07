@@ -32,16 +32,26 @@ module Build
 				while o < old_text.size and n < new_text.size and l < lcs.size
 					if !similar(old_text[o], lcs[l])
 						changes << Difference.new(:old, old_text[o])
-						o+=1
+						o += 1
 					elsif !similar(new_text[n], lcs[l])
 						changes << Difference.new(:new, new_text[n])
-						n+=1
+						n += 1
 					else
 						changes << Difference.new(:both, lcs[l])
-						o+=1; n+=1; l+=1
+						o += 1; n += 1; l += 1
 					end
 				end
-
+				
+				while o < old_text.size
+					changes << Difference.new(:old, old_text[o])
+					o += 1
+				end
+				
+				while n < new_text.size
+					changes << Difference.new(:old, new_text[n])
+					n += 1
+				end
+				
 				changes.map do |change|
 					change.value
 				end

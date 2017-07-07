@@ -43,4 +43,11 @@ EOF
 		
 		expect(merged).to be == MERGED.lines 
 	end
+	
+	it "can merge last lines" do
+		a = ["# Run tests:\n", "script:\n", "  - teapot -c test fetch\n"] 
+		b = ["  - teapot -c test fetch\n", "  - teapot -c test build Test/UnitTest2\n"]
+		
+		expect(Build::Text::Merge.combine(a, b)).to be == ["# Run tests:\n", "script:\n", "  - teapot -c test fetch\n", "  - teapot -c test build Test/UnitTest2\n"]
+	end
 end
